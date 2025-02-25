@@ -199,6 +199,7 @@ class LabTester:
             message="Edge case: No transformations (identity)"
         )
 
+        # Test 7: Extreme rotations
         point = np.array([1, 0, 0])
         transforms = [
             {'translation': np.array([0, 0, 0]), 'rotation': {'x': 360, 'y': 360, 'z': 360}},
