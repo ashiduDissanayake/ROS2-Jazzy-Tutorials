@@ -190,6 +190,27 @@ class LabTester:
             message="Complex transformations"
         )
 
+        # Test 6: No Transformation
+        point = np.array([1, 2, 3])
+        transforms = []  # No transformations
+        transformed = chain_transforms(point, transforms)
+        self.assert_array_almost_equal(
+            transformed, [1.0, 2.0, 3.0], decimal=3,
+            message="Edge case: No transformations (identity)"
+        )
+
+        point = np.array([1, 0, 0])
+        transforms = [
+            {'translation': np.array([0, 0, 0]), 'rotation': {'x': 360, 'y': 360, 'z': 360}},
+            {'translation': np.array([0, 0, 0]), 'rotation': {'x': -360, 'y': -360, 'z': -360}},
+            {'translation': np.array([0, 0, 0]), 'rotation': {'x': 720, 'y': 720, 'z': 720}}
+        ]
+        transformed = chain_transforms(point, transforms)
+        self.assert_array_almost_equal(
+            transformed, [1.0, 0.0, 0.0], decimal=3,
+            message="Edge case: Extreme rotations (360 degrees)"
+        )
+
     def print_summary(self):
         """Print summary of test results"""
         print(f"\n=== Test Summary ===")
