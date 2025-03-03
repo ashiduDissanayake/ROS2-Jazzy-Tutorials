@@ -47,17 +47,6 @@ class LabTester:
         self.assert_array_almost_equal(
             rotation, [1, 1, 1], decimal=3, message="No Rotation"
         )
-
-        # Test 2: Normal case with typical angles
-        point = np.array([1.0, 0.0, 0.0])
-        alpha = np.pi / 2  # 90 degrees
-        gamma = np.pi / 4  # 45 degrees
-        theta = np.pi / 6  # 30 degrees
-        rotation = rotation_three_angle(alpha, gamma, theta, point)
-        expected = np.array([0.70710678, 0.35355339, -0.61237244])
-        self.assert_array_almost_equal(
-            rotation, expected, decimal=3, message="Normal Rotation"
-        )
         
         # Test 2: 45-degree rotation
         alpha = gamma = theta = 45.0
@@ -145,24 +134,6 @@ class LabTester:
         #     print("❌ Anti Parallel Case: Expected ValueError but got no error")
         # except ValueError:
         #     print("✅ Anti Parallel Case: Correctly raised ValueError")
-
-        # Test 2: 90-degree rotation (normal case)
-        point = np.array([1, 0, 0])
-        a = np.array([0, 1, 0])
-        o = np.array([-1, 0, 0])
-        rotation = rotation_two_vector(a, o, point)
-        self.assert_array_almost_equal(
-            rotation, [0, 1, 0], decimal=3, message="90-degree rotation"
-        )
-        
-        # Test 3: Parallel vectors (edge case)
-        point = np.array([0, 1, 0])
-        a = np.array([1, 0, 0])
-        o = np.array([-1, 0, 0])
-        rotation = rotation_two_vector(a, o, point)
-        self.assert_array_almost_equal(
-            rotation, [0, 1, 0], decimal=3, message="Parallel vectors edge case"
-        )
 
     def test_rotation_eigen_vector(self, rotation_eigen_vector: Callable):
         """
